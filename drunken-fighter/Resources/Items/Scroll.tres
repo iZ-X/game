@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://dt7ul8yh5lgk2"]
+
+[ext_resource type="Texture2D" uid="uid://bumh8t8a1noii" path="res://icon.svg" id="1_inrvg"]
+[ext_resource type="Script" path="res://Item.gd" id="2_5y84y"]
+
+[resource]
+script = ExtResource("2_5y84y")
+icon = ExtResource("1_inrvg")
+name = "Scroll"
+type = "Scrolls"
+description = "Use this to gain ancient powers!"

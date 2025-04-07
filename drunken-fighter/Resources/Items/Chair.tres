@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://c8kjfvrk7fb3h"]
+
+[ext_resource type="Texture2D" uid="uid://cplbbhs4fj1uc" path="res://Assets/floor.png" id="1_b6dhw"]
+[ext_resource type="Script" path="res://Item.gd" id="2_8gowf"]
+
+[resource]
+script = ExtResource("2_8gowf")
+icon = ExtResource("1_b6dhw")
+name = "Chair"
+type = "Throwables"
+description = "Throw this towards your enemies to eliminate them!"

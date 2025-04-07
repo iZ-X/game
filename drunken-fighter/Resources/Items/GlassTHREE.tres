@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://benpf1ykjis2j"]
+
+[ext_resource type="Texture2D" uid="uid://dp4phu4hkss05" path="res://Assets/Glass 3.png" id="1_8nn33"]
+[ext_resource type="Script" path="res://Item.gd" id="2_cmlhg"]
+
+[resource]
+script = ExtResource("2_cmlhg")
+icon = ExtResource("1_8nn33")
+name = "GlassTHREE"
+type = "Throwables"
+description = "Throw towards enemies"

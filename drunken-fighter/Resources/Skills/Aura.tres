@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="Skill" load_steps=2 format=3 uid="uid://bgs3ch2ualrf8"]
+
+[ext_resource type="Script" path="res://Skill.gd" id="1_iwkcw"]
+
+[resource]
+script = ExtResource("1_iwkcw")
+name = "Aura"
+description = ""
+mana = 0.0

@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://cqnvm08sietfg"]
+
+[ext_resource type="Texture2D" uid="uid://bytcmf3pvkwf" path="res://Assets/White.png" id="1_altw2"]
+[ext_resource type="Script" path="res://Item.gd" id="2_x3h4m"]
+
+[resource]
+script = ExtResource("2_x3h4m")
+icon = ExtResource("1_altw2")
+name = "Dagger"
+type = "Weapon"
+description = "Poke your enemies!"
