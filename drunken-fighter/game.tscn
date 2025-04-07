@@ -109,8 +109,11 @@ offset_bottom = -8.0
 grow_horizontal = 1
 grow_vertical = 1
 
-[node name="Mob" parent="." instance=ExtResource("6_1qwol")]
+[node name="Mob" parent="." groups=["enemies"] instance=ExtResource("6_1qwol")]
 position = Vector2(69, 571)
+
+[node name="Mob2" parent="." groups=["enemies"] instance=ExtResource("6_1qwol")]
+position = Vector2(239, 564)
 
 [node name="AbstractItem" parent="." instance=ExtResource("7_xxuik")]
 top_level = true
@@ -153,5 +156,9 @@ position = Vector2(1086.25, 529)
 scale = Vector2(1.11739, 1.06316)
 texture = ExtResource("14_cmpnq")
 
+[connection signal="mobdied" from="Mob" to="Character/UI/WaveBar" method="_on_mobdied"]
+[connection signal="mobdied" from="Mob2" to="Character/UI/WaveBar" method="_on_mobdied"]
+
 [editable path="Character"]
 [editable path="Mob"]
+[editable path="Mob2"]

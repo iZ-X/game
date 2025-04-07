@@ -17,7 +17,7 @@ scale = Vector2(2.52, 2.52)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(-0.50828, -24.8112)
-scale = Vector2(0.965335, 0.766573)
+scale = Vector2(0.494306, 0.766573)
 shape = SubResource("RectangleShape2D_jkxkw")
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_player_entered"]

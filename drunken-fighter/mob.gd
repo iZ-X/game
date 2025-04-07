@@ -14,6 +14,7 @@ var knockback_timer: float = 0.0  # Timer for knockback duration
 @onready var animation_player: AnimationPlayer = $mobHealthbar/AnimationPlayer
 @export var dmg:int = 5
 
+signal mobdied
 signal mobhit
 
 func _ready() -> void:
@@ -47,6 +48,7 @@ func take_damage(amount:int):
 
 	if health <= 0:
 		is_dead = true
+		mobdied.emit()
 		set_deferred("monitoring", false)  
 		queue_free()
 

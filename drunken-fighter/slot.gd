@@ -6,7 +6,7 @@ class_name Slot
 @onready var AURA = preload("res://Resources/Skills/Aura.tres")
 @onready var STAB = preload("res://Resources/Skills/Stab.tres")
 @onready var test = load("res://Skill.gd")
-@onready var mob: = get_tree().current_scene.find_child("Mob")
+@onready var mobs: = get_tree().get_nodes_in_group("enemies")
 
 
 @export var stats: Item = null:
@@ -41,8 +41,8 @@ func use_item():
 			print(player.SPEED)
 			print("JJJ")
 		STAB:
-			
-			mob.dmg = 20
+			for mob in mobs:
+				mob.dmg = 20
 			player.health += 50.0
 			print("LLL")
 			

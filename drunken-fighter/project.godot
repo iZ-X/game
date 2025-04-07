@@ -24,6 +24,10 @@ HitStopManager="*res://HitStopManager.gd"
 window/stretch/mode="canvas_items"
 window/stretch/aspect="ignore"
 
+[global_group]
+
+enemies=""
+
 [input]
 
 ui_accept={
