@@ -2,7 +2,7 @@ class_name Mob extends CharacterBody2D
 
 @onready var target = $"../Character"
 var health: int = 100
-const speed = 200.0
+const speed = 120.0
 const GRAVITY = 980.0
 @onready var hitbox: Area2D = $Hitbox
 @onready var knockbackPower: int = 500
@@ -12,7 +12,7 @@ var current_state: int = State.CHASING  # Start in chasing mode
 var knockback_timer: float = 0.0  # Timer for knockback duration
 @onready var mob_healthbar: ProgressBar = $mobHealthbar
 @onready var animation_player: AnimationPlayer = $mobHealthbar/AnimationPlayer
-var dmg : int = 25
+@export var dmg:int = 5
 
 signal mobhit
 
@@ -34,15 +34,16 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 	
 	
-func take_damage(amount:int = dmg):
+func take_damage(amount:int):
 	
 	mobhit.emit()
+	
 	
 	
 	if is_dead: 
 		return
 	health -= dmg
-	print("Mob took", amount, "damage! Health:", health)
+	print("Mob took ", amount, " damage! Health:", health)
 
 	if health <= 0:
 		is_dead = true

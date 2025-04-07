@@ -44,9 +44,6 @@ func _input(event):
 		punch()
 
 func punch():
-	
-
-	
 	if not animation_player.is_playing():
 		play_attack_animation()
 
