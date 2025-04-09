@@ -1,0 +1,123 @@
+[gd_scene load_steps=12 format=3 uid="uid://dalu6q0f6q38f"]
+
+[ext_resource type="Script" path="res://mob.gd" id="1_is8bb"]
+[ext_resource type="Texture2D" uid="uid://bumh8t8a1noii" path="res://icon.svg" id="2_2owdf"]
+[ext_resource type="Script" path="res://mob_healthbar.gd" id="3_8w304"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dfk3s"]
+size = Vector2(128, 127)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tm3eq"]
+size = Vector2(135, 124)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_f7o8k"]
+corner_radius_top_left = 1
+corner_radius_top_right = 1
+corner_radius_bottom_right = 1
+corner_radius_bottom_left = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4o38k"]
+bg_color = Color(0.564706, 0.933333, 0.564706, 1)
+corner_radius_top_left = 1
+corner_radius_top_right = 1
+corner_radius_bottom_right = 1
+corner_radius_bottom_left = 1
+shadow_color = Color(0, 0, 0, 0.870588)
+anti_aliasing = false
+
+[sub_resource type="Animation" id="Animation_dswnm"]
+resource_name = "Fadein"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.233333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0.705882)]
+}
+
+[sub_resource type="Animation" id="Animation_x28nx"]
+resource_name = "Fadeout"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.233333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0.706), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_0uojd"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0.705882)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8po78"]
+_data = {
+"Fadein": SubResource("Animation_dswnm"),
+"Fadeout": SubResource("Animation_x28nx"),
+"RESET": SubResource("Animation_0uojd")
+}
+
+[node name="Mob" type="CharacterBody2D"]
+script = ExtResource("1_is8bb")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_2owdf")
+
+[node name="Hitbox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+light_mask = 0
+visibility_layer = 2
+position = Vector2(0, -0.5)
+shape = SubResource("RectangleShape2D_dfk3s")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-5.5, 0)
+shape = SubResource("RectangleShape2D_tm3eq")
+
+[node name="mobHealthbar" type="ProgressBar" parent="."]
+self_modulate = Color(1, 1, 1, 0.705882)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -41.0
+offset_top = -77.5
+offset_right = 41.0
+offset_bottom = -70.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_f7o8k")
+theme_override_styles/fill = SubResource("StyleBoxFlat_4o38k")
+value = 100.0
+show_percentage = false
+script = ExtResource("3_8w304")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="mobHealthbar"]
+libraries = {
+"": SubResource("AnimationLibrary_8po78")
+}
+
+[connection signal="mobhit" from="." to="mobHealthbar" method="_on_mob_mobhit"]
+[connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]

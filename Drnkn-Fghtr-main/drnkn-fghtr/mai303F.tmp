@@ -1,0 +1,191 @@
+[gd_scene load_steps=13 format=3 uid="uid://dcejowwb6rr5e"]
+
+[ext_resource type="Script" path="res://main_character.gd" id="1_ef64n"]
+[ext_resource type="Texture2D" uid="uid://bytcmf3pvkwf" path="res://Assets/White.png" id="1_jj3j1"]
+[ext_resource type="PackedScene" uid="uid://cv7y70o074hdb" path="res://slot.tscn" id="3_8jbmg"]
+[ext_resource type="Script" path="res://weapons.gd" id="3_fa3b6"]
+[ext_resource type="Script" path="res://hotbar.gd" id="3_sm2wm"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_14uht"]
+size = Vector2(27.5, 64.25)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ii88m"]
+size = Vector2(62, 124.265)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1di6h"]
+size = Vector2(25, 60)
+
+[sub_resource type="Animation" id="Animation_wuuma"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Hitbox/Arm:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Arm:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ArmSprite:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_ho0uc"]
+resource_name = "punch"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Hitbox/Arm:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, 1.74533, 0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Arm:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, 1.74533, 0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ArmSprite:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, 1.74533, 0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_h70d6"]
+_data = {
+"RESET": SubResource("Animation_wuuma"),
+"punch": SubResource("Animation_ho0uc")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_y7rmm"]
+size = Vector2(32, 64)
+
+[node name="Character" type="CharacterBody2D"]
+scale = Vector2(2, 2)
+script = ExtResource("1_ef64n")
+
+[node name="Body" type="Sprite2D" parent="."]
+position = Vector2(0, -2)
+scale = Vector2(1, 2)
+texture = ExtResource("1_jj3j1")
+
+[node name="ArmSprite" type="Sprite2D" parent="."]
+position = Vector2(-45.375, -0.249999)
+scale = Vector2(0.394531, 0.945313)
+texture = ExtResource("1_jj3j1")
+
+[node name="Hitbox" type="Area2D" parent="." groups=["player_attack"]]
+unique_name_in_owner = true
+
+[node name="Arm" type="CollisionShape2D" parent="Hitbox"]
+light_mask = 0
+visibility_layer = 2
+position = Vector2(-46.25, -0.125)
+shape = SubResource("RectangleShape2D_14uht")
+
+[node name="Body2" type="CollisionShape2D" parent="."]
+position = Vector2(0, -1.89394)
+scale = Vector2(1.0303, 1.0303)
+shape = SubResource("RectangleShape2D_ii88m")
+
+[node name="Arm" type="CollisionShape2D" parent="."]
+position = Vector2(-44.5, 0)
+shape = SubResource("RectangleShape2D_1di6h")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_h70d6")
+}
+
+[node name="BodyArea" type="CollisionShape2D" parent="."]
+light_mask = 0
+visibility_layer = 2
+position = Vector2(4.76837e-07, -2)
+scale = Vector2(2, 2)
+shape = SubResource("RectangleShape2D_y7rmm")
+
+[node name="Weapons" type="Node2D" parent="."]
+position = Vector2(604.72, 553)
+scale = Vector2(0.64, 0.64)
+script = ExtResource("3_fa3b6")
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="Hotbar" type="HBoxContainer" parent="UI"]
+custom_minimum_size = Vector2(120, 120)
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -130.0
+offset_top = -108.0
+offset_right = 238.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 0
+scale = Vector2(0.64, 0.64)
+script = ExtResource("3_sm2wm")
+
+[node name="slot" parent="UI/Hotbar" instance=ExtResource("3_8jbmg")]
+texture_filter = 1
+custom_minimum_size = Vector2(120, 120)
+layout_mode = 2
+
+[node name="slot2" parent="UI/Hotbar" instance=ExtResource("3_8jbmg")]
+texture_filter = 1
+custom_minimum_size = Vector2(120, 120)
+layout_mode = 2
+
+[node name="slot3" parent="UI/Hotbar" instance=ExtResource("3_8jbmg")]
+texture_filter = 1
+custom_minimum_size = Vector2(120, 120)
+layout_mode = 2
+
+[connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
+[connection signal="child_entered_tree" from="Weapons" to="Weapons" method="_on_child_entered_tree"]
+[connection signal="index" from="UI/Hotbar" to="Weapons" method="_on_index"]

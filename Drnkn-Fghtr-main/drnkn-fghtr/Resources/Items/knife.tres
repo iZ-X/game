@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://bhyxaqxpdqg7f"]
+
+[ext_resource type="Texture2D" uid="uid://clxgkykvj8sj6" path="res://Assets/knife.png" id="1_dps0m"]
+[ext_resource type="Script" path="res://Item.gd" id="2_qqn0y"]
+
+[resource]
+script = ExtResource("2_qqn0y")
+icon = ExtResource("1_dps0m")
+name = "Knife"
+type = "Weapon"
+description = "Stab your enemies"

@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://bun4uupvxmdoq"]
+
+[ext_resource type="Texture2D" uid="uid://bim04y2rsn7dk" path="res://Assets/Glass 4.png" id="1_in3yt"]
+[ext_resource type="Script" path="res://Item.gd" id="2_eqj62"]
+
+[resource]
+script = ExtResource("2_eqj62")
+icon = ExtResource("1_in3yt")
+name = "GlassFOUR"
+type = "Throwables"
+description = "Throw towards enemies"

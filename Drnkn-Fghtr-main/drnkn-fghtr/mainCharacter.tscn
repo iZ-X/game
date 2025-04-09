@@ -1,0 +1,421 @@
+[gd_scene load_steps=23 format=3 uid="uid://dcejowwb6rr5e"]
+
+[ext_resource type="Script" path="res://main_character.gd" id="1_ef64n"]
+[ext_resource type="Texture2D" uid="uid://bytcmf3pvkwf" path="res://Assets/White.png" id="1_jj3j1"]
+[ext_resource type="PackedScene" uid="uid://cv7y70o074hdb" path="res://slot.tscn" id="3_8jbmg"]
+[ext_resource type="Script" path="res://weapons.gd" id="3_fa3b6"]
+[ext_resource type="Script" path="res://hotbar.gd" id="3_sm2wm"]
+[ext_resource type="Script" path="res://progress_bar.gd" id="6_bwyiu"]
+[ext_resource type="Script" path="res://wave_bar.gd" id="7_i77pw"]
+[ext_resource type="Script" path="res://death_screen.gd" id="8_tny0x"]
+[ext_resource type="Texture2D" uid="uid://bumh8t8a1noii" path="res://icon.svg" id="9_nq7ft"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_14uht"]
+size = Vector2(27.5, 64.25)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ii88m"]
+size = Vector2(62, 124.265)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1di6h"]
+size = Vector2(25, 60)
+
+[sub_resource type="Animation" id="Animation_wuuma"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Hitbox/Arm:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Arm:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ArmSprite:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_ho0uc"]
+resource_name = "punch"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Hitbox/Arm:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, 1.74533, 0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Arm:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, 1.74533, 0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ArmSprite:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, 1.74533, 0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_h70d6"]
+_data = {
+"RESET": SubResource("Animation_wuuma"),
+"punch": SubResource("Animation_ho0uc")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_y7rmm"]
+size = Vector2(32, 64)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y4lwq"]
+bg_color = Color(0.184314, 0.184314, 0.184314, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wj127"]
+bg_color = Color(0.564706, 0.933333, 0.564706, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+anti_aliasing = false
+
+[sub_resource type="Animation" id="Animation_pg08n"]
+resource_name = "FadeInDeath"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("DeathScreen:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0.996078)]
+}
+
+[sub_resource type="Animation" id="Animation_dk7ie"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("DeathScreen:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("..:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_chiwv"]
+resource_name = "PlayerfadeFN"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("..:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_niyhv"]
+_data = {
+"FadeInDeath": SubResource("Animation_pg08n"),
+"PlayerfadeFN": SubResource("Animation_chiwv"),
+"RESET": SubResource("Animation_dk7ie")
+}
+
+[node name="Character" type="CharacterBody2D"]
+process_mode = 3
+scale = Vector2(2, 2)
+script = ExtResource("1_ef64n")
+
+[node name="Body" type="Sprite2D" parent="."]
+modulate = Color(0.099986, 0.099986, 0.099986, 1)
+position = Vector2(0, -2)
+scale = Vector2(1, 2)
+texture = ExtResource("1_jj3j1")
+
+[node name="ArmSprite" type="Sprite2D" parent="."]
+modulate = Color(0.099986, 0.099986, 0.099986, 1)
+position = Vector2(-45.375, -0.249999)
+scale = Vector2(0.394531, 0.945313)
+texture = ExtResource("1_jj3j1")
+
+[node name="Hitbox" type="Area2D" parent="." groups=["player_attack"]]
+unique_name_in_owner = true
+
+[node name="Arm" type="CollisionShape2D" parent="Hitbox"]
+light_mask = 0
+visibility_layer = 2
+position = Vector2(-46.25, -0.125)
+shape = SubResource("RectangleShape2D_14uht")
+
+[node name="Body2" type="CollisionShape2D" parent="."]
+position = Vector2(0, -1.89394)
+scale = Vector2(1.0303, 1.0303)
+shape = SubResource("RectangleShape2D_ii88m")
+
+[node name="Arm" type="CollisionShape2D" parent="."]
+position = Vector2(-44.5, 0)
+shape = SubResource("RectangleShape2D_1di6h")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_h70d6")
+}
+
+[node name="BodyArea" type="CollisionShape2D" parent="."]
+light_mask = 0
+visibility_layer = 2
+position = Vector2(4.76837e-07, -2)
+scale = Vector2(2, 2)
+shape = SubResource("RectangleShape2D_y7rmm")
+
+[node name="Weapons" type="Node2D" parent="."]
+position = Vector2(604.72, 553)
+scale = Vector2(0.64, 0.64)
+script = ExtResource("3_fa3b6")
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="Hotbar" type="HBoxContainer" parent="UI"]
+custom_minimum_size = Vector2(120, 120)
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -543.0
+offset_top = -107.0
+offset_right = -175.0
+offset_bottom = 13.0
+grow_horizontal = 2
+grow_vertical = 0
+scale = Vector2(0.64, 0.64)
+script = ExtResource("3_sm2wm")
+
+[node name="slot" parent="UI/Hotbar" instance=ExtResource("3_8jbmg")]
+texture_filter = 1
+custom_minimum_size = Vector2(120, 120)
+layout_mode = 2
+
+[node name="slot2" parent="UI/Hotbar" instance=ExtResource("3_8jbmg")]
+texture_filter = 1
+custom_minimum_size = Vector2(120, 120)
+layout_mode = 2
+
+[node name="slot3" parent="UI/Hotbar" instance=ExtResource("3_8jbmg")]
+texture_filter = 1
+custom_minimum_size = Vector2(120, 120)
+layout_mode = 2
+
+[node name="Health" type="ProgressBar" parent="UI"]
+self_modulate = Color(1, 1, 1, 0.705882)
+anchors_preset = -1
+anchor_left = 0.0286458
+anchor_top = 0.782407
+anchor_right = 0.233507
+anchor_bottom = 0.824074
+theme_override_styles/background = SubResource("StyleBoxFlat_y4lwq")
+theme_override_styles/fill = SubResource("StyleBoxFlat_wj127")
+value = 100.0
+rounded = true
+show_percentage = false
+script = ExtResource("6_bwyiu")
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="UI/Health"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 12
+text = "Health: 100"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="WaveBar" type="ProgressBar" parent="UI"]
+anchors_preset = -1
+anchor_left = 0.284722
+anchor_top = 0.029321
+anchor_right = 0.716146
+anchor_bottom = 0.0895062
+grow_horizontal = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_y4lwq")
+theme_override_styles/fill = SubResource("StyleBoxFlat_wj127")
+max_value = 1.0
+value = 1.0
+show_percentage = false
+script = ExtResource("7_i77pw")
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="UI/WaveBar"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.433602
+anchor_top = 0.205128
+anchor_right = 0.566398
+anchor_bottom = 0.794872
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 12
+text = "Enemies Left: Null"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="DeathScreen" type="Panel" parent="UI"]
+visible = false
+modulate = Color(1, 1, 1, 0)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("8_tny0x")
+
+[node name="Main" type="ColorRect" parent="UI/DeathScreen"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -253.5
+offset_top = -139.0
+offset_right = 253.5
+offset_bottom = 139.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.135012, 0.135012, 0.135012, 1)
+
+[node name="Image" type="TextureRect" parent="UI/DeathScreen/Main"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -30.0
+offset_top = -103.0
+offset_right = 30.0
+offset_bottom = -43.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1, 0.996402)
+texture = ExtResource("9_nq7ft")
+expand_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/DeathScreen/Main"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -80.0
+offset_top = -27.0
+offset_right = 80.0
+offset_bottom = 105.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.994784, 1)
+theme_override_constants/separation = 10
+
+[node name="Button" type="Button" parent="UI/DeathScreen/Main/VBoxContainer"]
+layout_mode = 2
+text = "Play Again"
+
+[node name="Button2" type="Button" parent="UI/DeathScreen/Main/VBoxContainer"]
+layout_mode = 2
+text = "Main Menu"
+
+[node name="Button3" type="Button" parent="UI/DeathScreen/Main/VBoxContainer"]
+layout_mode = 2
+text = "Exit"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="UI"]
+libraries = {
+"": SubResource("AnimationLibrary_niyhv")
+}
+
+[connection signal="plrdied" from="." to="UI/DeathScreen" method="_on_character_plrdied"]
+[connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
+[connection signal="child_entered_tree" from="Weapons" to="Weapons" method="_on_child_entered_tree"]
+[connection signal="index" from="UI/Hotbar" to="Weapons" method="_on_index"]
+[connection signal="pressed" from="UI/DeathScreen/Main/VBoxContainer/Button" to="UI/DeathScreen" method="_on_button_pressed"]
+[connection signal="pressed" from="UI/DeathScreen/Main/VBoxContainer/Button2" to="UI/DeathScreen" method="_on_button_2_pressed"]
+[connection signal="pressed" from="UI/DeathScreen/Main/VBoxContainer/Button3" to="UI/DeathScreen" method="_on_button_3_pressed"]
